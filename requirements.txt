@@ -1,0 +1,20 @@
+# base 
+fastapi
+pydantic
+sqlalchemy
+
+
+# deployment
+uvicorn
+
+# refactoring and tests
+black
+flake8
+pytest
+httpx
+
+# postgresdb client
+psycopg2
+
+# mongodb client
+motor

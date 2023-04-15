@@ -1,0 +1,62 @@
+version: "3.9"
+   
+services:
+  postgresdb:
+    container_name: postgresdb
+    image: postgres:15-alpine
+    volumes:      
+      - ./postgres/data:/var/lib/postgresql/data
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DB_VENDOR=postgres
+      - PGDATA=/var/lib/postgresql/data
+    restart: always
+  
+  mongodb:
+    image: mongo:latest
+    expose:
+      - '27017'
+    volumes:
+      - ./mongodb/data:/data/db
+      - ./mongodb/config:/data/configdb
+    environment:
+      - MONGO_INITDB_DATABASE=mongo
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+    restart: unless-stopped
+
+
+  backend:
+    build: 
+      context: .
+      dockerfile: dockerfiles/dev/fastapi/Dockerfile
+    container_name: backend
+    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - ./core:/usr/src/app
+    env_file:
+    - envs/dev/fastapi/.env
+    ports:
+      - "8000:8000"
+    environment:
+      - PGDB_PORT=5432
+      - PGDB_PASSWORD=postgres
+      - PGDB_USERNAME=postgres
+      - PGDB_DBNAME=postgres
+      - PGDB_HOSTNAME=postgresdb
+
+      - MGDB_PORT=27017
+      - MGDB_PASSWORD=mongo
+      - MGDB_USERNAME=mongo
+      - MGDB_DBNAME=mongo
+      - MGDB_HOSTNAME=mongodb
+
+
+      
+    depends_on:
+      - postgresdb
+      - mongodb
