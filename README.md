@@ -1,5 +1,5 @@
 <div align="center">
-<img loading="lazy" style="width:700px" src="./docs/hamravesh-banner.png">
+<img loading="lazy" style="width:700px" src="./docs/banner.png">
 <h1 align="center">FastAPI Hamravesh Template</h1>
 <h3 align="center">Sample Project to use hamravesh service provider for FastAPI app</h3>
 </div>
@@ -125,7 +125,9 @@ If you receive an error about a port being in use? Chances are it's because
 something on your machine is already running on port 8000. then you have to change the docker-compose.yml file according to your needs.
 ## Check it out in a browser
 
-Visit <http://localhost:8000> in your favorite browser.
+Visit <http://localhost:8000/swagger> in your favorite browser.
+<div align="center" ><img loading="lazy" style="width:700px" src="./docs/swagger.png"></div>
+
 
 # Testing Usage
 ## running all tests
