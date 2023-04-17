@@ -1,6 +1,16 @@
 from fastapi import FastAPI
 from config import settings
 
+if settings.ENABLE_SENTRY:
+    import sentry_sdk
+    sentry_sdk.init(
+        dsn=settings.SENTRY_DSN,
+
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        # We recommend adjusting this value in production,
+        traces_sample_rate=1.0,
+    )
 
 app = FastAPI(
     title="Simple Template Api",
@@ -27,5 +37,10 @@ async def shutdown():
     print("shutdown")
 
 @app.get("/")
-def test():
+async def test():
     return {"message": "for testing"}
+
+
+@app.get("/sentry-debug")
+async def trigger_error():
+    division_by_zero = 1 / 0

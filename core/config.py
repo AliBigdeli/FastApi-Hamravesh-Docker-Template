@@ -11,11 +11,15 @@ class Settings(BaseSettings):
     PGDB_HOSTNAME: str
     
     # mongo envs
-    MGDB_USERNAME: str
-    MGDB_PASSWORD: str
-    MGDB_PORT: int
-    MGDB_DBNAME: str
-    MGDB_HOSTNAME: str
+    # MGDB_USERNAME: str
+    # MGDB_PASSWORD: str
+    # MGDB_PORT: int
+    # MGDB_DBNAME: str
+    # MGDB_HOSTNAME: str
+    
+    # Sentry debugger
+    ENABLE_SENTRY:bool
+    SENTRY_DSN:str
 
 
 settings = Settings()

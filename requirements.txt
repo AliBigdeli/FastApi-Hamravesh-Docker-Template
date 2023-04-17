@@ -6,6 +6,10 @@ sqlalchemy
 
 # deployment
 uvicorn
+whitenoise
+
+# sentry exception logger
+sentry-sdk[fastapi]
 
 # refactoring and tests
 black
@@ -14,7 +18,7 @@ pytest
 httpx
 
 # postgresdb client
-psycopg2
+psycopg2-binary
 
 # mongodb client
 motor

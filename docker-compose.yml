@@ -16,18 +16,18 @@ services:
       - PGDATA=/var/lib/postgresql/data
     restart: always
   
-  mongodb:
-    image: mongo:latest
-    expose:
-      - '27017'
-    volumes:
-      - ./mongodb/data:/data/db
-      - ./mongodb/config:/data/configdb
-    environment:
-      - MONGO_INITDB_DATABASE=mongo
-      - MONGO_INITDB_ROOT_USERNAME=mongo
-      - MONGO_INITDB_ROOT_PASSWORD=mongo
-    restart: unless-stopped
+  # mongodb:
+  #   image: mongo:latest
+  #   expose:
+  #     - '27017'
+  #   volumes:
+  #     - ./mongodb/data:/data/db
+  #     - ./mongodb/config:/data/configdb
+  #   environment:
+  #     - MONGO_INITDB_DATABASE=mongo
+  #     - MONGO_INITDB_ROOT_USERNAME=mongo
+  #     - MONGO_INITDB_ROOT_PASSWORD=mongo
+  #   restart: unless-stopped
 
 
   backend:
@@ -38,8 +38,8 @@ services:
     command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
       - ./core:/usr/src/app
-    env_file:
-    - envs/dev/fastapi/.env
+    # env_file:
+    # - envs/dev/fastapi/.env
     ports:
       - "8000:8000"
     environment:
@@ -48,15 +48,16 @@ services:
       - PGDB_USERNAME=postgres
       - PGDB_DBNAME=postgres
       - PGDB_HOSTNAME=postgresdb
-
-      - MGDB_PORT=27017
-      - MGDB_PASSWORD=mongo
-      - MGDB_USERNAME=mongo
-      - MGDB_DBNAME=mongo
-      - MGDB_HOSTNAME=mongodb
+      - ENABLE_SENTRY=False
+      - SENTRY_DSN=None
+      # - MGDB_PORT=27017
+      # - MGDB_PASSWORD=mongo
+      # - MGDB_USERNAME=mongo
+      # - MGDB_DBNAME=mongo
+      # - MGDB_HOSTNAME=mongodb
 
 
       
     depends_on:
       - postgresdb
-      - mongodb
+      # - mongodb
