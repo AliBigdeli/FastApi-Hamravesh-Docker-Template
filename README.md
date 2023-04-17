@@ -222,7 +222,7 @@ in this page you have to provide general information's about the app you are abo
 ```properties
 app_name: my-site # name of the app which is going to be called inside the portal
 service_port: 8000 # which is based on the uvicorn port
-execute_command: uvicorn core.asgi:application --proxy-headers --host 0.0.0.0 --port 8000
+execute_command: uvicorn main:app --proxy-headers --host 0.0.0.0 --port 8000
 ```
 Note: provided information is just enough to run our program for more details please visit this url 
 <https://docs.hamravesh.com/darkube/create/git-repo/settings/general/>
