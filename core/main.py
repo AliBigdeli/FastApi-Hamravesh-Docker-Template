@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from config import settings
+from fastapi.middleware.cors import CORSMiddleware
+
 
 if settings.ENABLE_SENTRY:
     import sentry_sdk
@@ -26,6 +28,13 @@ app = FastAPI(
     docs_url="/swagger",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 async def startup():

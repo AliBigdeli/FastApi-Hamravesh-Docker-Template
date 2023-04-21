@@ -4,11 +4,11 @@ class Settings(BaseSettings):
     
     # postgres envs
     
-    PGDB_USERNAME: str
-    PGDB_PASSWORD: str
-    PGDB_PORT: int
-    PGDB_DBNAME: str
-    PGDB_HOSTNAME: str
+    PGDB_USERNAME: str = "postgres"
+    PGDB_PASSWORD: str = "postgres"
+    PGDB_PORT: int = 5432
+    PGDB_DBNAME: str = "postgres"
+    PGDB_HOSTNAME: str = "postgresdb"
     
     # mongo envs
     # MGDB_USERNAME: str
@@ -18,8 +18,8 @@ class Settings(BaseSettings):
     # MGDB_HOSTNAME: str
     
     # Sentry debugger
-    ENABLE_SENTRY:bool
-    SENTRY_DSN:str
+    ENABLE_SENTRY:bool = False
+    SENTRY_DSN:str = "http://sentry-dsn-url/"
 
 
 settings = Settings()
